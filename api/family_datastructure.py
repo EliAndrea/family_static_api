@@ -6,36 +6,61 @@ update this file to implement the following already declared methods:
 - get_member: Should return a member from the self._members list
 """
 from random import randint
+import json
 
 class Family:
-    def __init__(self, last_name):
+    def __init__(self, last_name,):
         self.last_name = last_name
 
         # example list of members
-        self._members = [{
-            "id": 1,
-            "first_name": "John"
-        }]
+        self._members = [
+            {
+                "id": 1,
+                "first_name": "John",
+                "last_name": self.last_name,
+                "age": 33,
+                "gender": "Male",
+                "lucky_numbers": [7, 13, 22]
+            },
+            {
+                "id": 2,
+                "first_name": "Jane",
+                "last_name": self.last_name,
+                "age": 35,
+                "gender": "Female",
+                "lucky_numbers": [10, 14, 3]
+            },
+            {
+                "id": 3,
+                "first_name": "Jimmy",
+                "last_name": self.last_name,
+                "age": 5,
+                "gender": "Male",
+                "lucky_numbers": [1]
+            }]
 
     # read-only: Use this method to generate random members ID's when adding members into the list
     def _generateId(self):
         return randint(0, 99999999)
 
     def add_member(self, member):
-        # fill this method and update the return
-        return None
+        member["id"] = self._generateId()
+        return self._members.append(member)
 
     def delete_member(self, id):
-        # fill this method and update the return
-        return None
+        new_members = list(filter(lambda member: member["id"] != id, self._members))
+        self._members = new_members
+        return self._members
 
     def update_member(self, id, member):
-        # fill this method and update the return
-        return None
+        members = self.delete_member(id)
+        member["id"] = id
+        members.append(member)
+        return members
 
     def get_member(self, id):
-        # fill this method and update the return
-        return None
+        member = list(filter(lambda m: m["id"] == id, self._members))
+        return member
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
