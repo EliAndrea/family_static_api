@@ -17,6 +17,7 @@ django-extensions = "*"
 django-rest-swagger = "*"
 redgreenunittest = "*"
 yapf = "*"
+django = ">=2.2.2"
 
 [dev-packages]
 
